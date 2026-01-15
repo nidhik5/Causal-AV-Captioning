@@ -1,3 +1,24 @@
 # Causal-AV-Captioning
 
-Causal Audio-Visual Video CaptioningThis project implements a framework to evaluate the causal influence of audio on video-language models. The goal is to determine if a model is truly integrating audio information or simply relying on visual bias to generate captions.📌 Project OverviewTraditional Video Language Models (VLMs) often ignore audio cues, leading to "Visual Bias." This project uses Causal Inference to quantify how much the audio stream actually "causes" the model to generate specific words. We use a combination of vision and audio encoders fused into a text generator to test these relationships.🛠️ Model ArchitectureThe system integrates three state-of-the-art models:Vision Encoder: VideoMAE – Processes video frames to extract spatial-temporal features.Audio Encoder: AST (Audio Spectrogram Transformer) – Converts audio into frequency-based features.Text Decoder: GIT – Fuses the multimodal embeddings to generate descriptive captions.🧪 Evaluation MethodologyWe evaluate the model using Zero-Shot Captioning and Counterfactual Swap Tests:Matched Test: Pairing a video (e.g., breaking glass) with its original audio.Swapped Test: Pairing the same video with conflicting audio (e.g., a bird squawk) to see if the model detects the mismatch and updates its caption.[Image showing the difference between a matched total effect and a swapped total effect]📊 Key Metrics & ResultsWe use Causal Effect metrics to measure the "strength" of the audio-visual connection. Below are the results from our initial Matched Test:MetricValueInterpretationTotal Effect (TE)0.1052Overall influence of audio on the output.Natural Direct Effect (NDE)0.1052Direct impact of audio on word choice.Natural Indirect Effect (NIE)0.0000Impact of audio mediated through visual perception.Modality Sensitivity0.8266The model's overall reliance on the audio stream.Findings:In the Swapped Test, the Total Effect dropped to -0.1725, proving the model successfully identified the audio-visual conflict.The high Modality Sensitivity confirms the model is actively "listening" rather than just guessing from the picture.
+### Project Details
+* **Project Name:** Causal Audio-Visual Integration
+* **Title:** Measuring Causal Influence of Audio in Multimodal Video Captioning
+* **Start & End Date:** Oct 2023 – Present
+
+### Description
+This project develops a framework to evaluate the **causal relationship** between audio-visual inputs and model outputs. By using Causal Inference, I measured whether Video-Language Models (VLMs) truly "listen" to audio or rely on visual bias to generate descriptions.
+
+**Core Contributions:**
+* **Model Fusion:** Integrated **VideoMAE** (Vision) and **AST** (Audio) encoders with a **GIT** text decoder for multimodal captioning.
+* **Causal Evaluation:** Implemented quantitative metrics—**Total Effect (TE)**, **Natural Direct Effect (NDE)**, and **Natural Indirect Effect (NIE)**—to isolate the specific influence of the audio stream.
+* **Counterfactual Testing:** Conducted "Audio Swap" experiments to verify model robustness. In tests, the model successfully detected audio-visual conflicts, shifting the caption from "breaking glass" to "bird squawk" based on audio cues, resulting in a **Modality Sensitivity** score of **0.8266**.
+
+---
+
+### Key Results (Matched Test)
+| Metric | Value | Interpretation |
+| :--- | :--- | :--- |
+| **Total Effect (TE)** | **0.1052** | Overall positive influence of audio on prediction accuracy. |
+| **Natural Direct Effect (NDE)** | **0.1052** | High direct impact of sound on generated text. |
+| **Natural Indirect Effect (NIE)** | **0.0000** | Audio did not alter visual perception; influence was purely additive. |
+| **Modality Sensitivity** | **0.8266** | Strong evidence of the model actively prioritizing audio cues. |
